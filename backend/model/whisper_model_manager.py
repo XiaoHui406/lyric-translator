@@ -1,8 +1,10 @@
 from model.interface.asr_model_manager import ASRModelManager
+from model.transcription_segment import TranscriptionSegment
 import whisper
 from whisper import Whisper
 from torch.cuda import is_available
-from enum import Enum
+from registry import asr_output_formatter
+from typing import List
 
 
 class WhisperModelManager(ASRModelManager):
@@ -25,11 +27,25 @@ class WhisperModelManager(ASRModelManager):
 
     def unload_model(self) -> None:
         del self.model
-        self.model = None
+        self.model: Whisper | None = None
 
-    def transcribe(self, audio: str, file_format: str) -> str:
+    def transcribe(self, audio: str, output_format: str) -> str:
         if not self.model:
             self.load_model()
         if self.model:
+            segments: List[TranscriptionSegment] = []
             asr_result = self.model.transcribe(audio=audio)
-        return ''
+            for item in asr_result['segments']:
+                assert type(item) is dict
+                segments.append(TranscriptionSegment(
+                    start=item['start'],
+                    end=item['end'],
+                    text=item['text']
+                ))
+            formatted_result: str = asr_output_formatter.format(
+                output_format=output_format,
+                segments=segments
+            )
+            return formatted_result
+        else:
+            raise TypeError("model is None")

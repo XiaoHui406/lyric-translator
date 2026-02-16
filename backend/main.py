@@ -5,6 +5,7 @@ from whisper import Whisper
 from whisper.utils import get_writer
 import shutil
 import os
+from registry import asr_model_manager
 
 app = FastAPI()
 
@@ -24,10 +25,16 @@ def run_asr(file: UploadFile, output_format: str) -> str:
     temp_file = f'audio/temp_{file.filename}'
     with open(temp_file, 'wb') as buffer:
         shutil.copyfileobj(file.file, buffer)
+
+    result = asr_model_manager.transcribe(
+        audio=temp_file,
+        output_format=output_format
+    )
+
     if os.path.exists(temp_file):
         os.remove(temp_file)
 
-    return '<asr result>'
+    return result
 
 
 if __name__ == "__main__":

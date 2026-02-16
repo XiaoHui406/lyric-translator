@@ -2,14 +2,28 @@ from model.transcription_segment import TranscriptionSegment
 from typing import List
 
 
-class ASROutputFormatter():
+class ASROutputFormatter:
 
     def format(
         self,
         output_format: str,
         segments: List[TranscriptionSegment]
     ) -> str:
-        ...
+        match output_format:
+            case 'srt':
+                return self._to_srt(segments=segments)
+            case 'lrc':
+                return self._to_lrc(segments=segments)
+            case 'txt':
+                return self._to_txt(segments=segments)
+            case 'json':
+                return self._to_json(segments=segments)
+            case 'vtt':
+                return self._to_vtt(segments=segments)
+            case 'tsv':
+                return self._to_tsv(segments=segments)
+            case _:
+                raise ValueError(f"Unsupported format: {output_format}")
 
     def _to_srt(
         self,

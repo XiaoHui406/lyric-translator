@@ -12,5 +12,5 @@ class ASRModelManager(ABC):
         ...
 
     @abstractmethod
-    def transcribe(self, audio: str, file_format: str) -> str:
+    def transcribe(self, audio: str, output_format: str) -> str:
         ...
