@@ -1,4 +1,4 @@
-from model.interface.asr_model_manager import ASRModelManager
+from manager.asr.interface.asr_model_manager import ASRModelManager
 from model.transcription_segment import TranscriptionSegment
 from faster_whisper import WhisperModel
 from torch.cuda import is_available

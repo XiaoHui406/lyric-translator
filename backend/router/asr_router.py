@@ -26,7 +26,7 @@ def unload_model() -> str:
 
 @asr_router.post('/transcribe')
 def transcribe(file: UploadFile) -> List[TranscriptionSegment]:
-    temp_file = f'audio/temp_{file.filename}'
+    temp_file = f'temp_{file.filename}'
     with open(temp_file, 'wb') as buffer:
         shutil.copyfileobj(file.file, buffer)
 
