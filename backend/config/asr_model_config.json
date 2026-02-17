@@ -1,0 +1,9 @@
+[
+    {
+        "id": 0,
+        "model_name": "whisper",
+        "model_size": [
+            "tiny", "base", "small", "medium", "turbo", "large"
+        ]
+    }
+]
