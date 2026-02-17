@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+from typing import List
+from model.transcription_segment import TranscriptionSegment
 
 
 class ASRModelManager(ABC):
@@ -12,5 +14,5 @@ class ASRModelManager(ABC):
         ...
 
     @abstractmethod
-    def transcribe(self, audio: str, output_format: str) -> str:
+    def transcribe(self, audio: str, output_format: str) -> List[TranscriptionSegment]:
         ...
