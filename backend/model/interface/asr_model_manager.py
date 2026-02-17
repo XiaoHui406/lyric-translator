@@ -14,5 +14,5 @@ class ASRModelManager(ABC):
         ...
 
     @abstractmethod
-    def transcribe(self, audio: str, output_format: str) -> List[TranscriptionSegment]:
+    def transcribe(self, audio: str) -> List[TranscriptionSegment]:
         ...

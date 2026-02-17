@@ -24,15 +24,14 @@ def unload_model() -> str:
     return "unload asr model successed"
 
 
-@asr_router.post('/transcribe/{output_format}')
-def transcribe(file: UploadFile, output_format: str) -> List[TranscriptionSegment]:
+@asr_router.post('/transcribe')
+def transcribe(file: UploadFile) -> List[TranscriptionSegment]:
     temp_file = f'audio/temp_{file.filename}'
     with open(temp_file, 'wb') as buffer:
         shutil.copyfileobj(file.file, buffer)
 
     result: List[TranscriptionSegment] = asr_model_manager.transcribe(
-        audio=temp_file,
-        output_format=output_format
+        audio=temp_file
     )
 
     if os.path.exists(temp_file):

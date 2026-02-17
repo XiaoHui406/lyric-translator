@@ -1,11 +1,7 @@
-class TranscriptionSegment:
+from pydantic import BaseModel
 
-    def __init__(
-        self,
-        start: float,
-        end: float,
-        text: str
-    ) -> None:
-        self.start: float = start
-        self.end = end
-        self.text = text
+
+class TranscriptionSegment(BaseModel):
+    start: float
+    end: float
+    text: str

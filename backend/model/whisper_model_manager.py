@@ -28,7 +28,7 @@ class WhisperModelManager(ASRModelManager):
         del self.model
         self.model: Whisper | None = None
 
-    def transcribe(self, audio: str, output_format: str) -> List[TranscriptionSegment]:
+    def transcribe(self, audio: str) -> List[TranscriptionSegment]:
         if not self.model:
             self.load_model()
         if self.model:
