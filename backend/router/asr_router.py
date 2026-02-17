@@ -18,6 +18,12 @@ def load_model(model_name: str, model_size: str) -> str:
     return "load asr model successed"
 
 
+@asr_router.get('/unload_model')
+def unload_model() -> str:
+    asr_model_manager.unload_model()
+    return "unload asr model successed"
+
+
 @asr_router.post('/transcribe/{output_format}')
 def transcribe(file: UploadFile, output_format: str) -> List[TranscriptionSegment]:
     temp_file = f'audio/temp_{file.filename}'
