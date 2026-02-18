@@ -1,0 +1,26 @@
+{
+    "version": "1.0.0",
+    "last_updated": "2024-05-20",
+    "models": [
+        {
+            "id": 0,
+            "name": "OpenAI Whisper Small",
+            "provider": "openai",
+            "type": "whisper",
+            "size": "small",
+            "support_languages": ["en", "zh", "ja", "ko"],
+            "min_vram_gb": 1,
+            "description": "速度极快，适合实时性要求高、硬件性能较低的场景。"
+        },
+        {
+            "id": 1,
+            "name": "FunASR SenseVoice Small",
+            "provider": "alibaba",
+            "type": "funasr",
+            "size": "iic/SenseVoiceSmall",
+            "support_languages": ["zh", "en", "yue", "ja", "ko"],
+            "min_vram_gb": 1,
+            "description": "阿里巴巴开源模型，对中文识别极佳。"
+        }
+    ]
+}
