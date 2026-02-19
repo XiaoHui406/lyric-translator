@@ -32,7 +32,10 @@ class WhisperModelManager(ASRModelManager):
             self.load_model()
         if self.model:
             segments: List[TranscriptionSegment] = []
-            (result_segments, _) = self.model.transcribe(audio=audio)
+            (result_segments, _) = self.model.transcribe(
+                audio=audio,
+                initial_prompt='如果是中文，请使用简体字'
+            )
             for item in result_segments:
                 segments.append(TranscriptionSegment(
                     start=round(item.start, 2),
