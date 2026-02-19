@@ -8,7 +8,7 @@ app = FastAPI()
 app.include_router(asr_router)
 
 
-@app.get('/')
+@app.get('/', include_in_schema=False)
 def to_docs():
     return RedirectResponse(url='/docs')
 
