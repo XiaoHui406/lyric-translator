@@ -9,7 +9,7 @@
             "type": "whisper",
             "size": "small",
             "support_languages": ["en", "zh", "ja", "ko"],
-            "min_vram_gb": 1,
+            "min_vram_gb": 2,
             "description": "速度极快，适合实时性要求高、硬件性能较低的场景。"
         },
         {
@@ -19,7 +19,7 @@
             "type": "funasr",
             "size": "iic/SenseVoiceSmall",
             "support_languages": ["zh", "en", "yue", "ja", "ko"],
-            "min_vram_gb": 1,
+            "min_vram_gb": 1.6,
             "description": "阿里巴巴开源模型，对中文识别极佳。"
         }
     ]
