@@ -6,6 +6,8 @@ from funasr import AutoModel
 from funasr.utils.postprocess_utils import rich_transcription_postprocess
 import soundfile as sf
 import io
+from pydub import AudioSegment
+import librosa
 
 
 def load_audio_with_fallback(audio_path: str, target_sr: int = 16000):
@@ -16,9 +18,6 @@ def load_audio_with_fallback(audio_path: str, target_sr: int = 16000):
     except Exception:
         # 如果失败（如aac格式），使用 pydub + ffmpeg
         try:
-            import pydub
-            from pydub import AudioSegment
-
             audio = AudioSegment.from_file(audio_path)
             # 转换为目标采样率
             if audio.frame_rate != target_sr:
@@ -45,8 +44,6 @@ def load_audio_with_fallback(audio_path: str, target_sr: int = 16000):
     # 重采样到目标采样率（SenseVoice需要16kHz）
     if sample_rate != target_sr:
         try:
-            import librosa
-
             waveform = librosa.resample(
                 waveform, orig_sr=sample_rate, target_sr=target_sr
             )
